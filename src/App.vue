@@ -1,28 +1,47 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
+  <div class="container">
+    <div style="position: relative">
+      <bubbles ref="bubbles">
+        ❤️
+      </bubbles>
+      <md-button
+        v-on:click="createBubbles"
+        class="container__button md-raised md-primary"
+      >
+        <md-icon class="container__button__icon">favorite</md-icon>Like
+      </md-button>
+    </div>
   </div>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
-
+import Bubbles from "./components/Bubbles.vue";
 export default {
-  name: 'App',
+  name: "App",
   components: {
-    HelloWorld
-  }
-}
+    Bubbles,
+  },
+  methods: {
+    createBubbles: function () {
+      this.$refs.bubbles.createBubbles(3);
+    },
+  },
+};
 </script>
 
-<style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+<style lang="scss" scoped>
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100vw;
+  height: 100vh;
+
+  &__button {
+    &__icon {
+      margin-right: 0.3rem;
+    }
+  }
 }
+
 </style>
