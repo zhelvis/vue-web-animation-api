@@ -8119,6 +8119,13 @@ vm-browserify@^1.0.1:
   resolved "https://registry.yarnpkg.com/vm-browserify/-/vm-browserify-1.1.2.tgz"
   integrity sha512-2ham8XPWTONajOR0ohOKOHXkm3+gaBmGut3SRuu75xLd/RRaY6vqgh8NBYYk7+RW3u5AtzPQZG8F10LHkl0lAQ==
 
+vue-browser-detect-plugin@^0.1.13:
+  version "0.1.13"
+  resolved "https://registry.yarnpkg.com/vue-browser-detect-plugin/-/vue-browser-detect-plugin-0.1.13.tgz#c29a784fc212e7fa721fa1630c0ea3920adf71ec"
+  integrity sha512-q6vFj+wLXiO+yQAf1Z1bElWiU+JCaG+NRpgwhJ9kp7H3t6EgO8u93QoQsmjLfEjDp59bGQNGsYFxDMX8L7mgpA==
+  dependencies:
+    vue "^2.6.11"
+
 vue-eslint-parser@^7.0.0:
   version "7.6.0"
   resolved "https://registry.yarnpkg.com/vue-eslint-parser/-/vue-eslint-parser-7.6.0.tgz"

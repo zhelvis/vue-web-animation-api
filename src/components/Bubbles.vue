@@ -8,10 +8,10 @@
 export default {
   name: "Bubbles",
   methods: {
-    createBubbles: function(num){
-      Array(num).fill().forEach(() => {
-        this.createBubble()
-      })
+    createBubbles: function (num) {
+      for (let i = 0; i < num; i++) {
+        this.createBubble();
+      }
     },
     createBubble: function () {
       // getting ref to DOM container
@@ -27,47 +27,67 @@ export default {
       const y = this.getRandomInt(-200, -100);
       const x = this.getRandomInt(-75, 75);
 
-      // declaring keyframes
-      const MainKeyFrame = [
-        // 0%
-        {
-          transform: "translateY(-50%) scale(1)",
-          opacity: 1,
-        },
-        // 100%
-        {
-          transform: `translateY(${y}px) scale(1.25)`,
-          opacity: 0,
-        },
-      ];
+      if (this.isCompositeAnimationSupported) {
+        // declaring keyframes
+        const MainKeyFrame = [
+          // 0%
+          {
+            transform: "translateY(-50%) scale(1)",
+            opacity: 1,
+          },
+          // 100%
+          {
+            transform: `translateY(${y}px) scale(1.25)`,
+            opacity: 0,
+          },
+        ];
 
-      const additionalKeyFrame = [
-        {
-          transform: "translateX(-50%)",
-        },
-        {
-          transform: `translateX(${x}px)`,
-        },
-      ];
+        const additionalKeyFrame = [
+          {
+            transform: "translateX(-50%)",
+          },
+          {
+            transform: `translateX(${x}px)`,
+          },
+        ];
 
-      /* 
+        /* 
         animation start. 
         Injected item will move by curve, because we have async timing for each axis
       */
-      item.animate(MainKeyFrame, {
-        duration: 1500,
-        iterations: 1,
-        fill: "both",
-        easing: "ease-out",
-      });
+        item.animate(MainKeyFrame, {
+          duration: 1500,
+          iterations: 1,
+          fill: "both",
+          easing: "ease-out",
+        });
 
-      item.animate(additionalKeyFrame, {
-        composite: "add",
-        duration: 1500,
-        iterations: 1,
-        fill: "both",
-        easing: "ease-in",
-      });
+        item.animate(additionalKeyFrame, {
+          composite: "add",
+          duration: 1500,
+          iterations: 1,
+          fill: "both",
+          easing: "ease-in",
+        });
+      } else {
+        const keyFrame = [
+          // 0%
+          {
+            transform: "translate(-50%, -50%) scale(1)",
+            opacity: 1,
+          },
+          // 100%
+          {
+            transform: `translate(${y}px, ${x}px) scale(1.25)`,
+            opacity: 0,
+          },
+        ];
+
+        item.animate(keyFrame, {
+          duration: 1500,
+          iterations: 1,
+        });
+      }
 
       // removing item from dom after composite animation will complited
       Promise.all(
@@ -79,6 +99,11 @@ export default {
     // generating random integer in fixed range
     getRandomInt: function (min, max) {
       return Math.floor(Math.random() * (max - min) + min);
+    },
+    // check WAAPI composite mode support
+    isCompositeAnimationSupported: function () {
+      const { isSafari, isIOS, isChromeIOS } = this.$browserDetect;
+      return !(isSafari || isIOS || isChromeIOS);
     },
   },
 };
