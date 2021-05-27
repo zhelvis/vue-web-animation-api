@@ -71,12 +71,10 @@ export default {
         });
       } else {
         const keyFrame = [
-          // 0%
           {
             transform: "translate(-50%, -50%) scale(1)",
             opacity: 1,
           },
-          // 100%
           {
             transform: `translate(${y}px, ${x}px) scale(1.25)`,
             opacity: 0,
